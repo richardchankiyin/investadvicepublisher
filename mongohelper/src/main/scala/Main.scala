@@ -1,6 +1,6 @@
-package com.richard
+package com.richard.mongohelper
 
 object Main {
   def main(args: Array[String]): Unit =
-    println("Hello, world!")
+    println("no of doc in report: " + MongoHelper.getNoOfDocsInReport)
 }
