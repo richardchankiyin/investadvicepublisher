@@ -1,6 +1,7 @@
 package com.richard.mongohelper
 
 import org.mongodb.scala._
+import org.mongodb.scala.model.Filters._
 import scala.concurrent.Await
 import scala.concurrent.duration._
 
@@ -17,4 +18,8 @@ object MongoHelper {
    val reportCollection:MongoCollection[Document] = mongodatabase.getCollection(reportCollString)
 
    def getNoOfDocsInReport(time:Int=10) = Await.result(reportCollection.count().toFuture(),time second)
+
+   def getDocById(id:String, time:Int=10) = Await.result(reportCollection.find(equal("id",id)).first().toFuture(),time second).toJson
+
+   def findDocBySymbol(symbol:String, size:Int=50, time:Int=10) = Await.result(reportCollection.find(equal("symbol",symbol)).limit(size).toFuture(), time second)
 }
