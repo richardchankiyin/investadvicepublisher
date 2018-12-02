@@ -1,6 +1,8 @@
 package com.richard.mongohelper
 
 import org.mongodb.scala._
+import scala.concurrent.Await
+import scala.concurrent.duration._
 
 object MongoHelper {
    val host="localhost"
@@ -14,9 +16,5 @@ object MongoHelper {
 
    val reportCollection:MongoCollection[Document] = mongodatabase.getCollection(reportCollString)
 
-   def getNoOfDocsInReport = reportCollection.count().subscribe(new Observer[Long] {
-       override def onNext(result: Long): Unit = print(result)
-       override def onError(e: Throwable): Unit = {}
-       override def onComplete(): Unit = {}
-   }) 
+   def getNoOfDocsInReport(time:Int=10) = Await.result(reportCollection.count().toFuture(),time second)
 }
