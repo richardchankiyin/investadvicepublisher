@@ -5,6 +5,7 @@ import org.mongodb.scala.model.Filters._
 import scala.concurrent.Await
 import scala.concurrent.duration._
 import org.mongodb.scala.model.Projections._
+import org.mongodb.scala.model.Sorts._
 
 object MongoHelper {
    val host="localhost"
@@ -22,5 +23,5 @@ object MongoHelper {
 
    def getDocById(id:String, time:Int=10) = Await.result(reportCollection.find(equal("id",id)).first().toFuture(),time second).toJson
 
-   def findDocBySymbol(symbol:String, size:Int=50, time:Int=10) = Await.result(reportCollection.find(equal("symbol",symbol)).projection(fields(include("id"), excludeId())).limit(size).toFuture(), time second).map(i=>i.get("id") match { case Some(bs) => bs.asString.getValue; case None => "" })
+   def findDocBySymbol(symbol:String, size:Int=50, time:Int=10) = Await.result(reportCollection.find(equal("symbol",symbol)).sort(orderBy(descending("time"))).projection(fields(include("id"), excludeId())).limit(size).toFuture(), time second).map(i=>i.get("id") match { case Some(bs) => bs.asString.getValue; case None => "" })
 }
