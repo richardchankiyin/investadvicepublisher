@@ -16,12 +16,20 @@ object MongoHelper {
    val db = "investadviceapp"
    val mongodatabase:MongoDatabase = mongoClient.getDatabase(db)
    val reportCollString = "report"
+   val newsCollString = "news"
 
    val reportCollection:MongoCollection[Document] = mongodatabase.getCollection(reportCollString)
+
+   val newsCollection:MongoCollection[Document] = mongodatabase.getCollection(newsCollString)
 
    def getNoOfDocsInReport(time:Int=10) = Await.result(reportCollection.count().toFuture(),time second)
 
    def getDocById(id:String, time:Int=10) = Await.result(reportCollection.find(equal("id",id)).first().toFuture(),time second).toJson
 
    def findDocBySymbol(symbol:String, size:Int=50, time:Int=10) = Await.result(reportCollection.find(equal("symbol",symbol)).sort(orderBy(descending("time"))).projection(fields(include("id"), excludeId())).limit(size).toFuture(), time second).map(i=>i.get("id") match { case Some(bs) => bs.asString.getValue; case None => "" })
+
+   def watchNews() = {
+      val i = newsCollection.watch().productIterator
+      while (i.hasNext) println(i.next)
+   }
 }

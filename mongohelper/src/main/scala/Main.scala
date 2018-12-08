@@ -7,5 +7,6 @@ object Main {
     println("doc report0001: " + MongoHelper.getDocById("report0001"))
     println("doc symbol 0005.HK: " + MongoHelper.findDocBySymbol("0005.HK"))
     println("doc symbol 2318.HK: " + MongoHelper.findDocBySymbol("2318.HK"))
+    MongoHelper.watchNews
   }
 }
