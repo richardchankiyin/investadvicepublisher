@@ -6,6 +6,9 @@ import scala.concurrent.Await
 import scala.concurrent.duration._
 import org.mongodb.scala.model.Projections._
 import org.mongodb.scala.model.Sorts._
+import com.mongodb.client.model.changestream.ChangeStreamDocument
+import org.mongodb.scala.bson.BsonDocument
+import org.mongodb.scala.Document
 
 object MongoHelper {
    val host="localhost"
@@ -28,8 +31,14 @@ object MongoHelper {
 
    def findDocBySymbol(symbol:String, size:Int=50, time:Int=10) = Await.result(reportCollection.find(equal("symbol",symbol)).sort(orderBy(descending("time"))).projection(fields(include("id"), excludeId())).limit(size).toFuture(), time second).map(i=>i.get("id") match { case Some(bs) => bs.asString.getValue; case None => "" })
 
+   val observer = new Observer[ChangeStreamDocument[Document]] {
+      //def getResumeToken: BsonDocument = Document().underlying
+      override def onNext(result: ChangeStreamDocument[Document]): Unit = { println (result) }
+      override def onError(e: Throwable): Unit = {}
+      override def onComplete(): Unit = {}
+   }
+   
    def watchNews() = {
-      val i = newsCollection.watch().productIterator
-      while (i.hasNext) println(i.next)
+      newsCollection.watch().subscribe(observer);
    }
 }
