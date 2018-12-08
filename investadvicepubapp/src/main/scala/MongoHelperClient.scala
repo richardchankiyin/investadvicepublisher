@@ -27,7 +27,7 @@ object MongoHelper {
 
    def getNoOfDocsInReport(time:Int=10) = Await.result(reportCollection.count().toFuture(),time second)
 
-   def getDocById(id:String, time:Int=10) = Await.result(reportCollection.find(equal("id",id)).first().toFuture(),time second).toJson
+   def getDocById(id:String, time:Int=10) = Await.result(reportCollection.find(equal("id",id)).projection(fields(excludeId())).first().toFuture(),time second).toJson
 
    def findDocBySymbol(symbol:String, size:Int=50, time:Int=10) = Await.result(reportCollection.find(equal("symbol",symbol)).sort(orderBy(descending("time"))).projection(fields(include("id"), excludeId())).limit(size).toFuture(), time second).map(i=>i.get("id") match { case Some(bs) => bs.asString.getValue; case None => "" })
 
