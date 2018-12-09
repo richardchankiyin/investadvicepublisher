@@ -48,8 +48,26 @@ class SpringApp {
           MongoHelper.getDocById(id)
        } catch {
           case t: java.lang.Throwable => {
+             logger.error(s"getDocById $id", t)
              throw new java.lang.IllegalArgumentException(s"docid $id invalid")
           }
        }
+    }
+
+    @RequestMapping(value=Array("/finddocbysymbol/{symbol}"), method=Array(RequestMethod.GET))
+    @ResponseBody
+    def findDocBySymbol(@PathVariable("symbol") symbol:String) = {
+        logger.info("findDocBySymbol: {}", symbol)
+        try {
+           val result = MongoHelper.findDocBySymbol(symbol).toArray
+           //logger.info("result value: {} class: {}", {result.toString}, {result.getClass})
+           result
+
+        } catch {
+           case t: java.lang.Throwable => {
+             logger.error(s"findDocBySymbol $symbol", t)
+             throw new java.lang.IllegalStateException(s"$symbol has no doc")
+           }
+        }
     }
 }
