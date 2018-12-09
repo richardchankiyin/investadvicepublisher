@@ -1,4 +1,4 @@
-package com.richard.investadvicepubapp
+package com.richard.investadvicereqres
 
 import org.mongodb.scala._
 import org.mongodb.scala.model.Filters._

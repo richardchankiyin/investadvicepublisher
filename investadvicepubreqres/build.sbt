@@ -1,4 +1,4 @@
-ThisBuild / organization := "com.richard.investadvicepubapp"
+ThisBuild / organization := "com.richard.investadvicereqres"
 ThisBuild / scalaVersion := "2.12.7"
 // set the Scala version used for the project
 ThisBuild / version      := "0.1.0-SNAPSHOT"
