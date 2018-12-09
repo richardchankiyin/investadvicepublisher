@@ -1,0 +1,31 @@
+<html>
+<script src='https://cdn.scaledrone.com/scaledrone.min.js' type='text/javascript'></script>
+
+<title>Scaledrone Client</title>
+channel: <input id="channel" type="text" value='jiUv2Rpk1O8tZbZ7' disabled/>
+<br/>
+<br/>
+console: <textarea id="console" readonly></textarea>
+
+<br/>
+<br/>
+news:<br/>
+<br/>
+<textarea id="news" rows="30" cols="50" readonly></textarea>
+<script language="javascript">
+const channelid = document.getElementById('channel').value;
+var consoleouttext = document.getElementById('console'); 
+var news = document.getElementById('news');
+const drone = new Scaledrone(channelid);
+console.log('connecting...');
+consoleouttext.value += "\nconnecting....";
+
+drone.on('error', error => {console.error(error); consoleouttext.value += "\n" + error; });
+
+const room = drone.subscribe('notifications');
+room.on('data', data => {
+  console.log('Received data object:', data)
+  news.value += "\n" + data; 
+});
+</script>
+</html>
