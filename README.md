@@ -2,6 +2,21 @@ investadvicepublisher
 =====================
 This repository demonstrates a platform to publish json based investment advices/research. Extraction can be done in restapi
 
+Background
+-----------
+Investors are now facing a lot of market information and a lot of them are unstructured. Many investors are going to build up a BigData centric research model to support more efficient investment decision activities. Structured market information and tagged based documents can help investors to select relevant market information effectively. As an investment advisory firm/research institute, providing attribute based documents will be more useful than text based documents because investors rely more on machine to analyze investment advices.
+
+In order to publish documents, websocket based solution and API based document enquiry will be important here. Therefore this project comes out.
+
+Architecture
+------------
+- MongoDB as a datastore of reports and news
+- News and Research Report Publisher store json based documents in MongoDB
+- MongoDB change stream push news to ScaleDrone (cloud based message publisher)
+- Investors can connect to ScaleDrone to receive update messages
+- Investors can browse report data (in json format) through Doc Retrieval Service Endpoint
+
+
 Prerequsite
 ------------
 - linux/unix/mac
