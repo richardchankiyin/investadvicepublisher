@@ -11,8 +11,6 @@ libraryDependencies += "org.mongodb.scala" %% "mongo-scala-driver" % "2.5.0"
 
 // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
 libraryDependencies += "org.springframework.boot" % "spring-boot-starter-web" % "1.5.18.RELEASE"
-// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-websocket
-libraryDependencies += "org.springframework.boot" % "spring-boot-starter-websocket" % "1.5.18.RELEASE"
 
 libraryDependencies += "com.typesafe.scala-logging" %% "scala-logging" % "3.7.0"
 
