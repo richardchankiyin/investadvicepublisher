@@ -38,7 +38,7 @@ class SpringApp {
     val logger = Logger(LoggerFactory.getLogger(this.getClass))
     @RequestMapping(Array("/home"))
     @ResponseBody
-    def home:String = "InvestServicePubApp Home\n" 
+    def home:String = "InvestServiceReqRes Home\n" 
 
     @RequestMapping(value=Array("/getdoc/{id}"), method=Array(RequestMethod.GET))
     @ResponseBody
