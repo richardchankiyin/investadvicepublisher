@@ -4,7 +4,7 @@ This repository demonstrates a platform to publish json based investment advices
 
 Background
 -----------
-Investors are now facing a lot of market information and a lot of them are unstructured. Many investors are going to build up a BigData centric research model to support more efficient investment decision activities. Structured market information and tagged based documents can help investors to select relevant market information effectively. As an investment advisory firm/research institute, providing attribute based documents will be more useful than text based documents because investors rely more on machine to analyze investment advices.
+Investors are now facing a lot of market information and a lot of them are unstructured. Many investors are going to build up BigData centric research models to support more efficient investment decision activities. Structured market information and tagged based documents can help investors to select relevant market information effectively. As an investment advisory firm/research institute, providing attribute based documents will be more useful than text based documents because investors rely more on machine to analyze investment advices.
 
 In order to publish documents, websocket based solution and API based document enquiry will be important here. Therefore this project comes out.
 
@@ -16,6 +16,7 @@ Architecture
 - Investors can connect to ScaleDrone to receive update messages
 - Investors can browse report data (in json format) through Doc Retrieval Service Endpoint
 
+![Image](investadvicepublisher_architecture.jpg)
 
 Prerequsite
 ------------
